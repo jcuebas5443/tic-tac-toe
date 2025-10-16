@@ -11,6 +11,9 @@ var currentPlayer = 1;
 
 var winner;
 
+
+
+//ONCLICK LOGIC
 //when player clicks a spot, change that spot to either x or o depending if it is an open spot or not
 function OnSpotClicked(thisElement)
 {
@@ -26,6 +29,9 @@ function OnSpotClicked(thisElement)
     }
 }
 
+
+
+//PLAYER UPDATE LOGIC
 //used to return the players icon based on a number
 function GetPlayerIcon(playerNum)
 {
@@ -35,6 +41,10 @@ function GetPlayerIcon(playerNum)
         return player2Icon;
 }
 
+
+
+
+//TILE LOGIC
 function GetTile(index)
 {
     return ticTacToeBoard[index];
@@ -46,6 +56,9 @@ function ChangeTile(index,value)
     UpdateTiles();
 }
 
+
+
+//TURN LOGIC
 //switches active players
 function SwitchPlayerTurn()
 {
@@ -65,20 +78,10 @@ function SwitchPlayerTurn()
     }
 }
 
-//check for wins function (check if indices are the same, if none, then tie)
-//horizontal:
-//if 0, 1, 2
-//if 3, 4, 5
-//if 6, 7, 8
 
-//vertical:
-//if 0, 3, 6
-//if 1, 4, 7
-//if 2, 5, 8
 
-//diagonal
-//if 0, 4, 8
-//if 2, 4, 6
+
+//WIN LOGIC
 function CheckForWin()
 {
     
@@ -133,6 +136,11 @@ function WinGame()
     ResetGame();
 }
 
+
+
+
+
+//GAME RESET LOGIC
 function ResetGame()
 {
     ticTacToeBoard = ["","","","","","","","",""];
@@ -140,6 +148,10 @@ function ResetGame()
     InitializeTiles();
 }
 
+
+
+
+//UPDATE LOGIC
 function UpdateTiles()
 {
     let tileGrid = document.getElementsByClassName("ticTacToeTile");
@@ -153,6 +165,9 @@ function UpdateTiles()
 }
 
 
+
+
+//START LOGIC
 //assign all the initial values to tiles when the page loads
 function InitializeTiles()
 {
