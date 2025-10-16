@@ -10,10 +10,13 @@ var ticTacToeBoard = ["","","","","","","","",""];
 var currentPlayer = 1;
 
 //when player clicks a spot, change that spot to either x or o depending if it is an open spot or not
-function OnSpotClicked(thisValue)
+function OnSpotClicked(thisElement)
 {
+    
+    let thisValue = thisElement.value;
     //if tile is empty, then assign this player's value to the array and update the actual board
-    if(GetTile(thisValue) === null)
+    
+    if(GetTile(thisValue) === "")
     {
         ChangeTile(thisValue,GetPlayerIcon(currentPlayer));
         SwitchPlayerTurn();
@@ -66,6 +69,7 @@ function UpdateTiles()
     //for each tile, assign it with the proper value from the array
     for (let i  = 0; i < tileGrid.length; i++)
     {
+        console.log(ticTacToeBoard[i]);
         tileGrid[i].innerText = ticTacToeBoard[i];
     }
 }
