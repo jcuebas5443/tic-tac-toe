@@ -3,10 +3,23 @@
     padding: 0;
     box-sizing: border-box;
  }
+ h1{
+    text-align: center;
+ }
  .container{
     border: 2px solid black;
     display: flex;
-
+    flex: wrap;
+    justify-content:center 
+   
+}
+.row{
+ 
+  
+}
+button{
+    width: 50px;
+    height:50px
 }
 
 .playerScore{
