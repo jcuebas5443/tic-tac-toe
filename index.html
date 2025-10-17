@@ -8,55 +8,54 @@
 </head>
 <body>
      <h1>Tic-Tac-toe</h1>
-<div class="container">
-    
-     <div class = "score">
-        <div class="playerScore">
-             <h2>player1</h2>
-            <p id = "player1Score">0</p>
-         </div>
-        <div class="playerScore">
-             <h2>player2</h2>
-             <p id = "player2Score">0</p>
-        </div>
-        <div class="playerScore">
-             <h2>tie</h2>
-             <p id = "playersTie">0</p>
-        </div>
+     <div class="container">
+     
+          <div class = "score">
+               <div class="playerScore">
+                    <h2>player1</h2>
+                    <p id = "player1Score">0</p>
+               </div>
+               <div class="playerScore">
+                    <h2>player2</h2>
+                    <p id = "player2Score">0</p>
+               </div>
+               <div class="playerScore">
+                    <h2>tie</h2>
+                    <p id = "playersTie">0</p>
+               </div>
+          </div>
+
+          <div class="playerTurn">
+               <h2 id="activePlayerText"></h2>
+          </div>
+
+          <div id="nextGameButtons">
+
+          </div>
+
+
+          <div class="gameGrid">
+               <div class="row">
+                    <button type="button" value="" onclick=" OnSpotClicked(this)" class="ticTacToeTile" id="ticTacToeTiles"></button>
+                    <button type="button" value="" onclick=" OnSpotClicked(this)" class="ticTacToeTile"></button>
+                    <button type="button" value="" onclick=" OnSpotClicked(this)" class="ticTacToeTile"></button>
+               </div> 
+               <div class="row">
+                    <button type="button" value="" onclick=" OnSpotClicked(this)" class="ticTacToeTile"></button>
+                    <button type="button" value="" onclick=" OnSpotClicked(this)" class="ticTacToeTile"></button>
+                    <button type="button" value="" onclick=" OnSpotClicked(this)" class="ticTacToeTile"></button>
+               </div>
+               <div class="row">
+                    <button type="button" value="" onclick=" OnSpotClicked(this)" class="ticTacToeTile"></button>
+                    <button type="button" value="" onclick=" OnSpotClicked(this)" class="ticTacToeTile"></button>
+                    <button type="button" value="" onclick=" OnSpotClicked(this)" class="ticTacToeTile"></button>
+               </div>
+          </div>
+
+          <div>
+               <button type="button" class="reset" value="" onclick =" ResetGame(); ResetScore(); PickUserIcon();"> reset </button>
+          </div>
      </div>
-
-        <div class="playerTurn">
-            <h2 id="activePlayerText"></h2>
-        </div>
-
-        <div id="nextGameButtons">
-
-        </div>
-
-
-        <div class="gameGrid">
-            <div class="row">
-               <button type="button" value="" onclick=" OnSpotClicked(this)" class="ticTacToeTile" id="ticTacToeTiles"></button>
-               <button type="button" value="" onclick=" OnSpotClicked(this)" class="ticTacToeTile"></button>
-               <button type="button" value="" onclick=" OnSpotClicked(this)" class="ticTacToeTile"></button>
-            </div> 
-             <div class="row">
-               <button type="button" value="" onclick=" OnSpotClicked(this)" class="ticTacToeTile"></button>
-               <button type="button" value="" onclick=" OnSpotClicked(this)" class="ticTacToeTile"></button>
-               <button type="button" value="" onclick=" OnSpotClicked(this)" class="ticTacToeTile"></button>
-             </div>
-              <div class="row">
-                <button type="button" value="" onclick=" OnSpotClicked(this)" class="ticTacToeTile"></button>
-                <button type="button" value="" onclick=" OnSpotClicked(this)" class="ticTacToeTile"></button>
-                <button type="button" value="" onclick=" OnSpotClicked(this)" class="ticTacToeTile"></button>
-
-              </div>
-        </div>
-        <div>
-          <button type="button" class="reset" value="" onclick =" ResetGame(); ResetScore(); PickUserIcon();"> reset </button>
-         </div>
-   </div>
-</div>
-<script src="index.js"></script>
+     <script src="index.js"></script>
 </body>
 </html>
