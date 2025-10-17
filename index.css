@@ -7,6 +7,7 @@
  }
 body{
    background-color: rgb(240, 232, 232);
+   text-shadow: 1px 1px 15px rgb(247, 15, 189);
    
 }
  h1{
@@ -67,9 +68,6 @@ body{
     
 }
 
-.ticTacToeTile:hover{
-  background-color: rgb(230, 25, 25);
-}
 button:active{
 box-shadow: 3px 3px #666;
 transform: translate(4px);
@@ -77,6 +75,7 @@ transform: translate(4px);
 
 button{
   box-shadow: 6px 6px #999;
+  border: 2px solid black;
 }
 
 
@@ -86,4 +85,9 @@ button{
   text-align: center;
   margin-bottom: 10px;
 
+}
+#nextGameButtons button{
+  width: 60px;
+  height: 50px;
+  
 }
