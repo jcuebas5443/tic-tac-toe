@@ -1,10 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitcount+Grid+Single+Ink:wght@100..900&display=swap');
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+   font-family: "Bitcount Grid Single Ink" ;
  }
+body{
+   background-color: rgb(240, 232, 232);
+   
+}
  h1{
     text-align: center;
+    margin-right: 100px;
+    text-decoration: underline;
+    
  }
 
  
@@ -15,7 +24,9 @@
     align-items: center;
   gap: 20px;
   align-self: center;
-   
+  width: 75%;
+  background-color: rgb(243, 233, 233);
+  margin-left: 50px;
 }
 .playerTurn h2{
     align-items: center;
@@ -23,9 +34,11 @@
 
 
 .playerScore{
-    border: 2px solid black;
+    border: 2px solid rgb(8, 8, 8);
     flex:1;
-  text-align: center;
+    text-align: center;
+   background-color: rgb(241, 229, 229);
+ 
 }
 
  .score {
@@ -33,6 +46,7 @@
     justify-content: space-evenly;
     margin: 20px 0;
     width: 80%;
+    box-shadow: 6px 6px #999;
 }
 .row {
     display: flex;
@@ -49,16 +63,27 @@
     height: 60px;
     font-size: 24px;
     cursor: pointer;
+    margin: 5px;
+    
 }
 
 .ticTacToeTile:hover{
   background-color: rgb(230, 25, 25);
 }
+button:active{
+box-shadow: 3px 3px #666;
+transform: translate(4px);
+}
 
+button{
+  box-shadow: 6px 6px #999;
+}
 
 
 .reset{
-  width: 50%;
+  width: 50px;
+  height: 50px;
   text-align: center;
+  margin-bottom: 10px;
 
 }
