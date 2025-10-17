@@ -1,6 +1,6 @@
-var player1Score;
-var player2Score;
-var tieAmount;
+var player1Score = 0;
+var player2Score = 0;
+var tieAmount = 0;
 
 var player1Icon = "X";
 var player2Icon = "O";
@@ -11,12 +11,16 @@ var currentPlayer = 1;
 
 var winner;
 
+var readyToStart = false;
+var iconSelected = false;
 
 
 //ONCLICK LOGIC
 //when player clicks a spot, change that spot to either x or o depending if it is an open spot or not
 function OnSpotClicked(thisElement)
 {
+    //can't play game without selecting player icon
+    if (!readyToStart || !iconSelected) return;
     
     let thisValue = thisElement.value;
     //if tile is empty, then assign this player's value to the array and update the actual board
@@ -113,10 +117,14 @@ function CheckForWin()
     }
     else if (CheckForTie() === true)
     {
-        console.log(`It's a tie!`);
         tieAmount++;
-        document.getElementById("tieScore").innerText = tieAmount;
-        ResetGame();
+        document.getElementById("playersTie").innerText = tieAmount;
+
+        //take away the current player text for now and replace it with the winner
+        let activePlayerText = document.getElementById("activePlayerText");
+        activePlayerText.innerText = `Tie!`;
+
+        PickNextGame();
     }
     
 }
@@ -139,16 +147,32 @@ function CheckTileSequence(num1, num2, num3)
 {
     if(GetTile(num1) !== "" && GetTile(num1) === GetTile(num2) && GetTile(num2) === GetTile(num3))
     {
+        //uses any one of the winning tiles to get the winning player
         winner = GetTile(num1);
+
+        //changes the colors of the winning tiles
+        ChangeWinningTileColors(num1, num2, num3);
+        
+        //tells the game this player won
         return true;
     }
     return false;
 }
 
+function ChangeWinningTileColors(num1, num2, num3)
+{
+    let tileGrid = document.getElementsByClassName("ticTacToeTile");
+    
+    //for each tile, assign it with the proper value from the array
+    for (let i  = 0; i < tileGrid.length; i++)
+    {
+        if (i === num1 || i === num2 || i === num3)
+            tileGrid[i].style.backgroundColor = "#757575ff";
+    }
+}
+
 function WinGame()
 {
-    console.log(`Winner: ${winner}`);
-
     //update win counts
     if (GetPlayerFromIcon(winner) === 1)
     {
@@ -162,9 +186,31 @@ function WinGame()
     }
     //tie score updating is in tie function
 
-    ResetGame();
+    //take away the current player text for now and replace it with the winner
+    let activePlayerText = document.getElementById("activePlayerText");
+    activePlayerText.innerText = `Winner: ${winner}`;
+
+    PickNextGame();
 }
 
+
+
+
+//BETWEEN GAMES LOGIC
+function PickNextGame()
+{
+    readyToStart = false;
+    let gameButtonSection = document.getElementById("nextGameButtons");
+
+    let gameButtons = document.createElement("div");
+    gameButtons.innerHTML = `
+            <button onclick="ResetGame();">Play Again</button>
+            <button onclick="ResetGame(); ResetScore(); PickUserIcon();">Reset Game</button>
+        `;
+    gameButtonSection.append(gameButtons);
+
+    
+}
 
 
 
@@ -175,8 +221,28 @@ function ResetGame()
     ticTacToeBoard = ["","","","","","","","",""];
 
     
+    RemoveNextGameButtons();
+    InitializeTiles();
+}
+
+function ResetScore()
+{
+    //reset scores back to nothing
+    player1Score = 0;
+    player2Score = 0;
+    tieAmount = 0;
+    document.getElementById("playersTie").innerText = tieAmount;
+    document.getElementById("player1Score").innerText = player1Score;
+    document.getElementById("player2Score").innerText = player2Score;
 
     InitializeTiles();
+}
+
+function RemoveNextGameButtons()
+{
+    let gameButtonSection = document.getElementById("nextGameButtons");
+
+    gameButtonSection.innerHTML = "";
 }
 
 
@@ -199,19 +265,24 @@ function UpdateTiles()
 
 
 //START LOGIC
-//assign all the initial values to tiles when the page loads
+//assign all the initial values to tiles when new game begins
 function InitializeTiles()
 {
+    readyToStart = true;
+
     let tileGrid = document.getElementsByClassName("ticTacToeTile");
     
     //for each tile, assign it with the proper value from the array
     for (let i  = 0; i < tileGrid.length; i++)
     {
         tileGrid[i].value = i;
+        tileGrid[i].style.backgroundColor = "#ddddddff";
     }
 
     //assign player text
     currentPlayer = 1;
+
+    //show current player
     let activePlayerText = document.getElementById("activePlayerText");
     activePlayerText.innerText = `Player: ${GetPlayerIcon(currentPlayer)}`;
 
@@ -219,4 +290,51 @@ function InitializeTiles()
     UpdateTiles();
 }
 
+//displays buttons where user can pick their icon
+function PickUserIcon()
+{
+    let gameButtonSection = document.getElementById("nextGameButtons");
+
+    let gameButtons = document.createElement("div");
+    gameButtons.innerHTML = `
+            <button onclick="ChoosePlayer(this.innerText);">X</button>
+            <button onclick="ChoosePlayer(this.innerText);">O</button>
+        `;
+    gameButtonSection.append(gameButtons);
+
+    //display select player text
+    let activePlayerText = document.getElementById("activePlayerText");
+    activePlayerText.innerText = `Select a player.`;
+
+    iconSelected = false;
+
+}
+
+//assigns the player the value they choose
+function ChoosePlayer(value)
+{
+    iconSelected = true;
+    player1Icon = value;
+    if (value === "X")
+    {
+        player2Icon = "O";
+    }
+    else if (value === "O")
+    {
+        player2Icon = "X";
+    }
+
+    
+    //show current player
+    let activePlayerText = document.getElementById("activePlayerText");
+    activePlayerText.innerText = `Player: ${GetPlayerIcon(currentPlayer)}`;
+
+    //get rid of buttons
+    RemoveNextGameButtons();
+}
+
 InitializeTiles();
+PickUserIcon();
+
+//todo:
+//display select your icon at first
