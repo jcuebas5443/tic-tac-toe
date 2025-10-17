@@ -50,3 +50,15 @@
     font-size: 24px;
     cursor: pointer;
 }
+
+.ticTacToeTile:hover{
+  background-color: rgb(230, 25, 25);
+}
+
+
+
+.reset{
+  width: 50%;
+  text-align: center;
+
+}
