@@ -14,6 +14,9 @@ var winner;
 var readyToStart = false;
 var iconSelected = false;
 
+var player1Color = "#b9ffc5ff"
+var player2Color = "#ffbabaff"
+
 
 //ONCLICK LOGIC
 //when player clicks a spot, change that spot to either x or o depending if it is an open spot or not
@@ -28,6 +31,7 @@ function OnSpotClicked(thisElement)
     if(GetTile(thisValue) === "")
     {
         ChangeTile(thisValue,GetPlayerIcon(currentPlayer));
+        HighlightSquare(currentPlayer, thisValue);
         SwitchPlayerTurn();
         CheckForWin();
     }
@@ -55,6 +59,30 @@ function GetPlayerFromIcon(icon)
     else if (icon === player2Icon)
     {
         return 2;
+    }
+}
+
+//used to highlight the just-selected square
+function HighlightSquare(playerNum, squareIndex)
+{
+    let tileGrid = document.getElementsByClassName("ticTacToeTile");
+    
+    
+    //find this tile and color it accordingly
+    for (let i  = 0; i < tileGrid.length; i++)
+    {
+        if (i === Number(squareIndex))
+        {
+            
+            if (playerNum === 1)
+            {
+                tileGrid[i].style.backgroundColor = player1Color;
+            }
+            else
+            {
+                tileGrid[i].style.backgroundColor = player2Color;
+            }
+        }
     }
 }
 
@@ -163,11 +191,12 @@ function ChangeWinningTileColors(num1, num2, num3)
 {
     let tileGrid = document.getElementsByClassName("ticTacToeTile");
     
+
     //for each tile, assign it with the proper value from the array
     for (let i  = 0; i < tileGrid.length; i++)
     {
         if (i === num1 || i === num2 || i === num3)
-            tileGrid[i].style.backgroundColor = "#757575ff";
+            tileGrid[i].style.backgroundColor = "#eeeeeeff";
     }
 }
 
@@ -191,6 +220,18 @@ function WinGame()
     activePlayerText.innerText = `Winner: ${winner}`;
 
     PickNextGame();
+}
+
+function ResetTileColors()
+{
+    let tileGrid = document.getElementsByClassName("ticTacToeTile");
+    
+    //for each tile, assign it with the proper value from the array
+    for (let i  = 0; i < tileGrid.length; i++)
+    {
+        tileGrid[i].value = i;
+        tileGrid[i].style.backgroundColor = "#ffffff";
+    }
 }
 
 
@@ -259,6 +300,7 @@ function UpdateTiles()
         
         tileGrid[i].innerText = ticTacToeBoard[i];
     }
+
 }
 
 
@@ -270,14 +312,7 @@ function InitializeTiles()
 {
     readyToStart = true;
 
-    let tileGrid = document.getElementsByClassName("ticTacToeTile");
-    
-    //for each tile, assign it with the proper value from the array
-    for (let i  = 0; i < tileGrid.length; i++)
-    {
-        tileGrid[i].value = i;
-        tileGrid[i].style.backgroundColor = "#ddddddff";
-    }
+    ResetTileColors();
 
     //assign player text
     currentPlayer = 1;
@@ -304,7 +339,7 @@ function PickUserIcon()
 
     //display select player text
     let activePlayerText = document.getElementById("activePlayerText");
-    activePlayerText.innerText = `Select a player.`;
+    activePlayerText.innerText = `Player 1: Select an icon.`;
 
     iconSelected = false;
 
@@ -333,8 +368,10 @@ function ChoosePlayer(value)
     RemoveNextGameButtons();
 }
 
+
+//FUNCTIONS CALLED ON START
 InitializeTiles();
 PickUserIcon();
 
-//todo:
-//display select your icon at first
+//make winning squares pulse a certain color
+//show which player has which icon on top
