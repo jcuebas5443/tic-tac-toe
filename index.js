@@ -9,6 +9,11 @@ var ticTacToeBoard = ["","","","","","","","",""];
 
 var currentPlayer = 1;
 
+var winner;
+
+
+
+//ONCLICK LOGIC
 //when player clicks a spot, change that spot to either x or o depending if it is an open spot or not
 function OnSpotClicked(thisElement)
 {
@@ -19,10 +24,14 @@ function OnSpotClicked(thisElement)
     if(GetTile(thisValue) === "")
     {
         ChangeTile(thisValue,GetPlayerIcon(currentPlayer));
+        CheckForWin();
         SwitchPlayerTurn();
     }
 }
 
+
+
+//PLAYER UPDATE LOGIC
 //used to return the players icon based on a number
 function GetPlayerIcon(playerNum)
 {
@@ -32,6 +41,10 @@ function GetPlayerIcon(playerNum)
         return player2Icon;
 }
 
+
+
+
+//TILE LOGIC
 function GetTile(index)
 {
     return ticTacToeBoard[index];
@@ -43,6 +56,9 @@ function ChangeTile(index,value)
     UpdateTiles();
 }
 
+
+
+//TURN LOGIC
 //switches active players
 function SwitchPlayerTurn()
 {
@@ -62,6 +78,80 @@ function SwitchPlayerTurn()
     }
 }
 
+
+
+
+//WIN LOGIC
+function CheckForWin()
+{
+    
+    if(
+        CheckTileSequence(0, 1, 2) === true ||
+        CheckTileSequence(3, 4, 5) === true ||
+        CheckTileSequence(6, 7, 8) === true ||
+        CheckTileSequence(0, 3, 6) === true ||
+        CheckTileSequence(1, 4, 7) === true ||
+        CheckTileSequence(2, 5, 8) === true ||
+        CheckTileSequence(0, 4, 8) === true ||
+        CheckTileSequence(2, 4, 6) === true
+    )
+    {
+        WinGame();
+    }
+    else if (CheckForTie() === true)
+    {
+        console.log(`It's a tie!`);
+        ResetGame();
+    }
+    
+}
+
+//checks if all items are full and if they are then its a tie
+function CheckForTie()
+{
+    for (let i = 0; i < ticTacToeBoard.length; i++)
+    {
+        if (ticTacToeBoard[i] === "") 
+        {
+            
+            return false;
+        }
+    }
+    return true;
+}
+
+function CheckTileSequence(num1, num2, num3)
+{
+    if(GetTile(num1) !== "" && GetTile(num1) === GetTile(num2) && GetTile(num2) === GetTile(num3))
+    {
+        winner = GetTile(num1);
+        return true;
+    }
+    return false;
+}
+
+function WinGame()
+{
+    console.log(`Winner: ${winner}`);
+    ResetGame();
+}
+
+
+
+
+
+//GAME RESET LOGIC
+function ResetGame()
+{
+    ticTacToeBoard = ["","","","","","","","",""];
+    currentPlayer = 1;
+    InitializeTiles();
+}
+
+
+
+
+//UPDATE LOGIC
 function UpdateTiles()
 {
     let tileGrid = document.getElementsByClassName("ticTacToeTile");
@@ -69,12 +159,15 @@ function UpdateTiles()
     //for each tile, assign it with the proper value from the array
     for (let i  = 0; i < tileGrid.length; i++)
     {
-        console.log(ticTacToeBoard[i]);
+        
         tileGrid[i].innerText = ticTacToeBoard[i];
     }
 }
 
 
+
+
+//START LOGIC
 //assign all the initial values to tiles when the page loads
 function InitializeTiles()
 {
