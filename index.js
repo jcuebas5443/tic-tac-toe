@@ -217,7 +217,7 @@ function WinGame()
 
     //take away the current player text for now and replace it with the winner
     let activePlayerText = document.getElementById("activePlayerText");
-    activePlayerText.innerText = `Winner: ${winner}`;
+    activePlayerText.innerText = `Winner: Player ${GetPlayerFromIcon(winner)}(${winner})`;
 
     PickNextGame();
 }
@@ -353,10 +353,18 @@ function ChoosePlayer(value)
     if (value === "X")
     {
         player2Icon = "O";
+
+        //update player text on screen
+        document.getElementById("player1Title").innerText = 'Player 1 (X)';
+        document.getElementById("player2Title").innerText = 'Player 2 (O)';
     }
     else if (value === "O")
     {
         player2Icon = "X";
+
+        //update player text on screen
+        document.getElementById("player1Title").innerText = 'Player 1 (O)';
+        document.getElementById("player2Title").innerText = 'Player 2 (X)';
     }
 
     
