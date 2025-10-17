@@ -24,8 +24,8 @@ function OnSpotClicked(thisElement)
     if(GetTile(thisValue) === "")
     {
         ChangeTile(thisValue,GetPlayerIcon(currentPlayer));
-        CheckForWin();
         SwitchPlayerTurn();
+        CheckForWin();
     }
 }
 
@@ -39,6 +39,19 @@ function GetPlayerIcon(playerNum)
         return player1Icon;
     else if (playerNum === 2)
         return player2Icon;
+}
+
+//used to get the player number if given an icon
+function GetPlayerFromIcon(icon)
+{
+    if (icon === player1Icon)
+    {
+        return 1;
+    }
+    else if (icon === player2Icon)
+    {
+        return 2;
+    }
 }
 
 
@@ -101,6 +114,8 @@ function CheckForWin()
     else if (CheckForTie() === true)
     {
         console.log(`It's a tie!`);
+        tieAmount++;
+        document.getElementById("tieScore").innerText = tieAmount;
         ResetGame();
     }
     
@@ -133,6 +148,20 @@ function CheckTileSequence(num1, num2, num3)
 function WinGame()
 {
     console.log(`Winner: ${winner}`);
+
+    //update win counts
+    if (GetPlayerFromIcon(winner) === 1)
+    {
+        player1Score++;
+        document.getElementById("player1Score").innerText = player1Score;
+    }
+    else if (GetPlayerFromIcon(winner) === 2)
+    {
+        player2Score++;
+        document.getElementById("player2Score").innerText = player2Score;
+    }
+    //tie score updating is in tie function
+
     ResetGame();
 }
 
@@ -144,7 +173,9 @@ function WinGame()
 function ResetGame()
 {
     ticTacToeBoard = ["","","","","","","","",""];
-    currentPlayer = 1;
+
+    
+
     InitializeTiles();
 }
 
@@ -178,6 +209,13 @@ function InitializeTiles()
     {
         tileGrid[i].value = i;
     }
+
+    //assign player text
+    currentPlayer = 1;
+    let activePlayerText = document.getElementById("activePlayerText");
+    activePlayerText.innerText = `Player: ${GetPlayerIcon(currentPlayer)}`;
+
+    //actually update visible tiles
     UpdateTiles();
 }
 
