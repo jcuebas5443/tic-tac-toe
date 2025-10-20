@@ -111,6 +111,6 @@ button:hover {
   }
 }
 
-.pulse-win {
+.pulseWin {
   animation: pulseWin 0.8s infinite;
 }

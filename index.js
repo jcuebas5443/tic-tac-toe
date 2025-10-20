@@ -196,7 +196,7 @@ function ChangeWinningTileColors(num1, num2, num3)
     for (let i  = 0; i < tileGrid.length; i++)
     {
         if (i === num1 || i === num2 || i === num3)
-            tileGrid[i].classList.add("pulse-win");
+            tileGrid[i].classList.add("pulseWin");
     }
 }
 
@@ -231,7 +231,7 @@ function ResetTileColors()
     {
         tileGrid[i].value = i;
         tileGrid[i].style.backgroundColor = "#ffffff";
-        tileGrid[i].classList.remove("pulse-win");
+        tileGrid[i].classList.remove("pulseWin");
     }
 }
 
