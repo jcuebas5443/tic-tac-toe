@@ -196,7 +196,7 @@ function ChangeWinningTileColors(num1, num2, num3)
     for (let i  = 0; i < tileGrid.length; i++)
     {
         if (i === num1 || i === num2 || i === num3)
-            tileGrid[i].style.backgroundColor = "#eeeeeeff";
+            tileGrid[i].classList.add("pulse-win");
     }
 }
 
@@ -231,6 +231,7 @@ function ResetTileColors()
     {
         tileGrid[i].value = i;
         tileGrid[i].style.backgroundColor = "#ffffff";
+        tileGrid[i].classList.remove("pulse-win");
     }
 }
 
@@ -380,6 +381,3 @@ function ChoosePlayer(value)
 //FUNCTIONS CALLED ON START
 InitializeTiles();
 PickUserIcon();
-
-//make winning squares pulse a certain color
-//show which player has which icon on top

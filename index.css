@@ -69,8 +69,8 @@ body{
 }
 
 button:active{
-box-shadow: 3px 3px #666;
-transform: translate(4px);
+  box-shadow: 3px 3px #666;
+  transform: translate(4px);
 }
 
 button{
@@ -90,4 +90,27 @@ button{
   width: 60px;
   height: 50px;
   
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+@keyframes pulseWin {
+  0% {
+    background-color: #eeeeee;
+    transform: scale(1);
+  }
+  50% {
+    background-color: #00ccff;
+    transform: scale(1.05);
+  }
+  100% {
+    background-color: #eeeeee;
+    transform: scale(1);
+  }
+}
+
+.pulse-win {
+  animation: pulseWin 0.8s infinite;
 }
