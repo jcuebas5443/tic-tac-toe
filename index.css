@@ -23,11 +23,11 @@ body{
     display:flex;
     flex-direction: column;
     align-items: center;
-  gap: 20px;
-  align-self: center;
-  width: 75%;
-  background-color: rgb(243, 233, 233);
-  margin-left: 50px;
+    gap: 20px;
+    align-self: center;
+    width: 75%;
+    background-color: rgb(243, 233, 233);
+    margin: auto;
 }
 .playerTurn h2{
     align-items: center;
